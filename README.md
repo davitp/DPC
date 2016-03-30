@@ -1,0 +1,2 @@
+# DPC
+Declarative Predicate Calculus
