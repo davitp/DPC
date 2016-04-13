@@ -3,23 +3,19 @@
 namespace DPC.Model
 {
     /// <summary>
-    /// Class defines predicate
+    /// Logical operation definition
+    /// Defines connectivity between Predicates and other logical operatoins
+    /// Example: AND, OR, NOT
     /// </summary>
-    public class Predicate : IFormulaNode
+    public class Logical : IFormulaNode
     {
         /// <summary>
-        /// Children of predicate
+        /// Child nodes of logical tree
         /// </summary>
         public IEnumerable<IFormulaNode> Children { get; set; }
 
         /// <summary>
-        /// Dimention of predicate
-        /// How many arguments can be be placed into the predicate
-        /// </summary>
-        public int Dimention { get; set; }
-
-        /// <summary>
-        /// Parent node in tree
+        /// Parent node of logical subtree
         /// </summary>
         public IFormulaNode Parent { get; set; }
 
@@ -27,19 +23,17 @@ namespace DPC.Model
         /// Constructor
         /// </summary>
         /// <param name="parent"></param>
-        public Predicate(Logical parent)
-            :this()
+        public Logical(Logical parent) : this()
         {
             Parent = parent;
         }
 
         /// <summary>
-        /// Construct predicate
+        /// Constructor
         /// </summary>
-        public Predicate()
+        public Logical()
         {
             Children = new List<IFormulaNode>();
         }
-
     }
 }
