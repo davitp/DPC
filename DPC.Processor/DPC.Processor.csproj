@@ -4,14 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3FEA3702-5D35-4074-9327-B7FFA403D109}</ProjectGuid>
+    <ProjectGuid>{B866FE00-76F2-4FAC-9D17-72236BCC758E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DPC.Model</RootNamespace>
-    <AssemblyName>DPC.Model</AssemblyName>
+    <RootNamespace>DPC.Processor</RootNamespace>
+    <AssemblyName>DPC.Processor</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,13 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formula.cs" />
-    <Compile Include="IFormulaNode.cs" />
-    <Compile Include="Logical.cs" />
-    <Compile Include="Operand.cs" />
-    <Compile Include="Predicate.cs" />
+    <Compile Include="API\IFormulaProcessor.cs" />
+    <Compile Include="API\ILanguageProvider.cs" />
+    <Compile Include="Default\DefaultFormulaProcessor.cs" />
+    <Compile Include="Default\DefaultLanguageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DPC.Model\DPC.Model.csproj">
+      <Project>{3fea3702-5d35-4074-9327-b7ffa403d109}</Project>
+      <Name>DPC.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
