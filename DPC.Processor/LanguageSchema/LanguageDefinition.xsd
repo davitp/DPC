@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="LanguageDefinition"
+    targetNamespace="http://github.com/davitp/DPC/LanguageDefinition.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://github.com/davitp/DPC/LanguageDefinition.xsd"
+    xmlns:mstns="http://github.com/davitp/DPC/LanguageDefinition.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xs:simpleType name="LogicalOperatorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="{AND}"/>
+      <xs:enumeration value="{OR}"/>
+      <xs:enumeration value="{NOT}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PredicateType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="{Equal}" />
+      <xs:enumeration value="{NotEqual}" />
+      <xs:enumeration value="{Less}" />
+      <xs:enumeration value="{Greater}" />
+      <xs:enumeration value="{LessOrEqual}" />
+      <xs:enumeration value="{GreaterOrEqual}" />
+      <xs:enumeration value="{Between}" />
+      <xs:enumeration value="{HasSubstring}" />
+      <xs:enumeration value="{IsSubstring}" />
+      <xs:enumeration value="{IsZero}" />
+      <xs:enumeration value="{In}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:complexType name="LogicalOperatorDefinitionType">
+    <xs:sequence>
+      <xs:element name="Definition" type="LogicalOperatorType" />
+      <xs:element name="Implementation" type="xs:string" />
+      <xs:element name="Dimention" type="xs:int" default="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PredicateDefinitionType">
+    <xs:sequence>
+      <xs:element name="Definition"  type="PredicateType"/>
+      <xs:element name="Implementation"  type="xs:string"/>
+      <xs:element name="Dimention" type="xs:int" default="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LogicalOperatorDefinitionsType">
+    <xs:sequence>
+      <xs:element name="LogicalOperatorDefinition" type="LogicalOperatorDefinitionType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PredicateDefinitionsType" >
+    <xs:sequence>
+      <xs:element name="PredicateDefinition" type="PredicateDefinitionType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LanguageMetadataDefinitionType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="LanguageDefinitionType">
+    <xs:sequence>
+      <xs:element name="LogicalOperatorDefinitions" type="LogicalOperatorDefinitionsType" />
+      <xs:element name="PredicateDefinitions" type="PredicateDefinitionsType" />
+      <xs:element name="MetadataDefinition" type="LanguageMetadataDefinitionType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:element name="LanguageDefinitions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="LanguageDefinition"  type="LanguageDefinitionType" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>
