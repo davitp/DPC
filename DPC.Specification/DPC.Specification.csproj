@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3FEA3702-5D35-4074-9327-B7FFA403D109}</ProjectGuid>
+    <ProjectGuid>{E7CC509C-1C33-49F1-A923-C13B35C1071A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DPC.Model</RootNamespace>
-    <AssemblyName>DPC.Model</AssemblyName>
+    <RootNamespace>DPC.Specification</RootNamespace>
+    <AssemblyName>DPC.Specification</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,12 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formula\Formula.cs" />
-    <Compile Include="Formula\IFormulaNode.cs" />
-    <Compile Include="Formula\Logical.cs" />
-    <Compile Include="Formula\Operand.cs" />
-    <Compile Include="Formula\Predicate.cs" />
+    <Compile Include="Definitions\BaseOperatorDefinition.cs" />
+    <Compile Include="Definitions\LanguageMetadataDefinition.cs" />
+    <Compile Include="Definitions\LogicalOperatorDefinition.cs" />
+    <Compile Include="Definitions\PredicateOperatorDefinition.cs" />
+    <Compile Include="Definitions\PrioritizerOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LanguageSchema\LanguageDefinition.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

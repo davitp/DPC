@@ -15,7 +15,7 @@ namespace DPC.Model
         public IEnumerable<IFormulaNode> Children { get; set; }
 
         /// <summary>
-        /// Parent of operand (shoudl be predicate)
+        /// Parent of operand (should be predicate)
         /// </summary>
         public IFormulaNode Parent { get; set; }
 
