@@ -10,9 +10,17 @@ namespace DPC.Model
     public class Formula
     {
         /// <summary>
+        /// Constructor
+        /// </summary>
+        public Formula()
+        {
+            Tree = null;
+        }
+
+        /// <summary>
         /// Expression tree node
         /// </summary>
-        public IFormulaNode Tree { get; set; }
+        public IFormulaNode Tree { get; }
 
         /// <summary>
         /// Traverse on tree and apply action on each node

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Formula\Formula.cs" />
     <Compile Include="Formula\IFormulaNode.cs" />
+    <Compile Include="Formula\IFormulaOperator.cs" />
     <Compile Include="Formula\Logical.cs" />
     <Compile Include="Formula\Operand.cs" />
     <Compile Include="Formula\Predicate.cs" />

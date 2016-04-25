@@ -41,11 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Definitions\BaseOperatorDefinition.cs" />
+    <Compile Include="Definitions\LanguageDefinition.cs" />
     <Compile Include="Definitions\LanguageMetadataDefinition.cs" />
     <Compile Include="Definitions\LogicalOperatorDefinition.cs" />
     <Compile Include="Definitions\PredicateOperatorDefinition.cs" />
     <Compile Include="Definitions\PrioritizerOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\LanguageDefinitionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LanguageSchema\LanguageDefinition.xsd">

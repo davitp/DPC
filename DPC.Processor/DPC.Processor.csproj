@@ -45,10 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\IFormulaProcessor.cs" />
-    <Compile Include="API\ILanguageProvider.cs" />
     <Compile Include="Default\DefaultFormulaProcessor.cs" />
-    <Compile Include="Default\DefaultLanguageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\FormulaProcessorRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DPC.Model\DPC.Model.csproj">
