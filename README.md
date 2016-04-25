@@ -1,4 +1,2 @@
-# DPC
-Declarative Predicate Calculus
-
-(c) 2016
+Declarative Definition of Predicate.
+TODO: Fill this page. 
