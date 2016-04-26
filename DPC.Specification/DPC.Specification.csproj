@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Specification.cs" />
     <Compile Include="Definitions\BaseOperatorDefinition.cs" />
     <Compile Include="Definitions\LanguageDefinition.cs" />
     <Compile Include="Definitions\LanguageMetadataDefinition.cs" />

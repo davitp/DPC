@@ -20,7 +20,7 @@ namespace DPC.Specification.Repository
         /// <summary>
         /// Single instance internals
         /// </summary>
-        private static LanguageDefinitionRepository instance = null;
+        private static LanguageDefinitionRepository instance;
 
         /// <summary>
         /// Get single instance of repository

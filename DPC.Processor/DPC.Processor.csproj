@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\IFormulaProcessor.cs" />
+    <Compile Include="API\Processor.cs" />
     <Compile Include="Default\DefaultFormulaProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FormulaProcessorRepository.cs" />
@@ -53,6 +54,10 @@
     <ProjectReference Include="..\DPC.Model\DPC.Model.csproj">
       <Project>{3fea3702-5d35-4074-9327-b7ffa403d109}</Project>
       <Name>DPC.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DPC.Specification\DPC.Specification.csproj">
+      <Project>{e7cc509c-1c33-49f1-a923-c13b35c1071a}</Project>
+      <Name>DPC.Specification</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
