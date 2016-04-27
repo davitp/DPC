@@ -25,5 +25,15 @@
         /// For example: Using brackets for defining priority or using automatic order
         /// </summary>
         public PrioritizerOption Prioritizer { get; set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public LanguageMetadataDefinition()
+        {
+            Name = string.Empty;
+            OpenBracket = string.Empty;
+            CloseBracket = string.Empty;
+        }
     }
 }

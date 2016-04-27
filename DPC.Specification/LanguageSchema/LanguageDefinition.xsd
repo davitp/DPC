@@ -6,7 +6,7 @@
     xmlns="http://gnu.org"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
-  <xs:simpleType name="LogicalOperatorType">
+  <xs:simpleType name="LogicalOperatorType" id="__LogicalOperatorType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="{AND}" id="__And" />
       <xs:enumeration value="{OR}" id="__Or"/>
@@ -14,7 +14,7 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="PredicateType">
+  <xs:simpleType name="PredicateType" id="__PredicateType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="{Equal}" id="__Equal" />
       <xs:enumeration value="{NotEqual}" id="__NotEqual"/>

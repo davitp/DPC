@@ -57,10 +57,27 @@
     <None Include="..\DPC.Specification\LanguageSchema\LanguageDefinition.xsd">
       <Link>Definitions\LanguageDefinition.xsd</Link>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Definitions\LanguageDefinitions.xml" />
+    <Content Include="Definitions\LanguageDefinitions.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DPC.Model\DPC.Model.csproj">
+      <Project>{3fea3702-5d35-4074-9327-b7ffa403d109}</Project>
+      <Name>DPC.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DPC.Processor\DPC.Processor.csproj">
+      <Project>{b866fe00-76f2-4fac-9d17-72236bcc758e}</Project>
+      <Name>DPC.Processor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DPC.Specification\DPC.Specification.csproj">
+      <Project>{e7cc509c-1c33-49f1-a923-c13b35c1071a}</Project>
+      <Name>DPC.Specification</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

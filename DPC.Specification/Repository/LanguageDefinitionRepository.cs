@@ -47,5 +47,22 @@ namespace DPC.Specification.Repository
             // throw on problem
             throw new Exception($"Logical Operator with code ({language}) is not defined");
         }
+
+        /// <summary>
+        /// Register language definition
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="definition"></param>
+        public void RegisterLanguageDefinition(LanguageDefinition definition)
+        {
+            // check for existance
+            if (LanguageDefinitions.ContainsKey(definition.Name))
+            {
+                throw  new Exception($"Language with name {definition.Name} is already registered");
+            }
+
+            // add 
+            LanguageDefinitions.Add(definition.Name, definition);
+        }
     }
 }
