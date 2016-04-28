@@ -12,7 +12,7 @@ namespace DPC.Model
         /// <summary>
         /// Child nodes of logical tree
         /// </summary>
-        public IEnumerable<IFormulaNode> Children { get; set; }
+        public IList<IFormulaNode> Children { get; set; }
 
         /// <summary>
         /// Parent node of logical subtree

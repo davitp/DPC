@@ -11,7 +11,7 @@ namespace DPC.Model
         /// <summary>
         /// Children of predicate
         /// </summary>
-        public IEnumerable<IFormulaNode> Children { get; set; }
+        public IList<IFormulaNode> Children { get; set; }
 
         /// <summary>
         /// Parent node in tree

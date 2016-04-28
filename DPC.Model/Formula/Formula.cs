@@ -20,7 +20,7 @@ namespace DPC.Model
         /// <summary>
         /// Expression tree node
         /// </summary>
-        public IFormulaNode Tree { get; }
+        public IFormulaNode Tree { get; set; }
 
         /// <summary>
         /// Traverse on tree and apply action on each node

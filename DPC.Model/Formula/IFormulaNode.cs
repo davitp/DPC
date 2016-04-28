@@ -15,6 +15,6 @@ namespace DPC.Model
         /// <summary>
         /// Child nodes 
         /// </summary>
-        IEnumerable<IFormulaNode> Children { get; set; } 
+        IList<IFormulaNode> Children { get; set; } 
     }
 }

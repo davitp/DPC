@@ -35,10 +35,12 @@ namespace DPC.Processor.Repository
         /// <summary>
         /// Register formula processor
         /// </summary>
-        /// <param name="language"></param>
         /// <param name="processor"></param>
-        public void RegisterFormulaProcessor(string language, IFormulaProcessor processor)
+        public void RegisterFormulaProcessor(IFormulaProcessor processor)
         {
+            // get language
+            var language = processor.Language;
+            
             if (FormulaProcessors.ContainsKey(language))
             {
                 throw new Exception($"Processor for language {language} is already registered");

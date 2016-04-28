@@ -12,7 +12,7 @@ namespace DPC.Model
         /// <summary>
         /// Children operand (should be empty)
         /// </summary>
-        public IEnumerable<IFormulaNode> Children { get; set; }
+        public IList<IFormulaNode> Children { get; set; }
 
         /// <summary>
         /// Parent of operand (should be predicate)
@@ -37,7 +37,7 @@ namespace DPC.Model
         /// </summary>
         public Operand()
         {
-            Children = Enumerable.Empty<IFormulaNode>();
+            Children = new List<IFormulaNode>();
         }
     }
 }

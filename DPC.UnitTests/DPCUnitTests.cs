@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
 using System.Text.RegularExpressions;
+using DPC.Model;
+using DPC.Processor.Default;
+using DPC.Processor.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DPC.UnitTests
@@ -16,6 +20,7 @@ namespace DPC.UnitTests
         public DPCUnitTests()
         {
             OutputLocation = AppDomain.CurrentDomain.BaseDirectory;
+            Specification.API.Specification.Initialize(LanguageDefinitionsPath);
         }
 
         /// <summary>
@@ -39,9 +44,69 @@ namespace DPC.UnitTests
         [TestMethod]
         public void DummyTest()
         {
-            Assert.IsNotNull(PathPrefix);
+            var subtree1 = new Predicate()
+            {
+                OpCode = "__Equal",
+                Parent = null,
+                Children = new List<IFormulaNode>()
+                {
+                    new Operand()
+                    {
+                        Value = 1
+                    },
+                    new Operand()
+                    {
+                        Value = 1
+                    }
+                }
+            };
 
-            Specification.API.Specification.Initialize(LanguageDefinitionsPath);
+            var subtree2 = new Predicate()
+            {
+                OpCode = "__Less",
+                Parent = null,
+                Children = new List<IFormulaNode>()
+                {
+                    new Operand()
+                    {
+                        Value = 1
+                    },
+                    new Operand()
+                    {
+                        Value = 2
+                    }
+                }
+            };
+
+            var subtree3 = new Logical()
+            {
+                OpCode = "__And",
+                Children = new List<IFormulaNode>()
+                {
+                    subtree1,
+                    subtree2
+                }
+            };
+
+            
+
+            var formula = new Formula()
+            {
+                Tree = new Logical()
+                {
+                    OpCode = "__Or",
+                    Children = new List<IFormulaNode>()
+                    {
+                        subtree1, subtree3
+                    }
+                }
+
+        };
+
+            FormulaProcessorRepository.Instance.RegisterFormulaProcessor(new DefaultFormulaProcessor("SQL"));
+            var processor = FormulaProcessorRepository.Instance.GetFormulaProcessor("SQL");
+            var result = processor.Process(formula);
+
         }
     }
 }
