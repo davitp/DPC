@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Mime;
+using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DPC.UnitTests
@@ -29,7 +31,7 @@ namespace DPC.UnitTests
         /// <summary>
         /// Language definitions file path
         /// </summary>
-        public const string LanguageDefinitionsPath = "LanguageDefinitions.xml"; 
+        public const string LanguageDefinitionsPath = "LanguageDefinitions.xml";
 
         /// <summary>
         /// Dummy test method
@@ -43,3 +45,5 @@ namespace DPC.UnitTests
         }
     }
 }
+
+

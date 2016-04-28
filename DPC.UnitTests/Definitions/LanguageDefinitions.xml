@@ -4,9 +4,9 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://gnu.org ..\..\..\DPC.Specification\LanguageSchema\LanguageDefinition.xsd" >
 
-  <LanguageDefinition>
+  <LanguageDefinition Name="SQL">
     
-    <MetadataDefinition Name="SQL" OpenBracket="(" CloseBracket=")" Prioritizer="BracketPrioritizer" />
+    <MetadataDefinition OpenBracket="(" CloseBracket=")" Prioritizer="BracketPrioritizer" />
 
     <LogicalOperatorDefinitions>
       <LogicalOperatorDefinition Operator="{AND}"  Implementation="{0} AND {1}"/>

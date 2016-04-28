@@ -64,7 +64,6 @@
   </xs:complexType>
 
   <xs:complexType name="LanguageMetadataDefinitionType">
-    <xs:attribute name="Name" type="xs:string" />
     <xs:attribute name="OpenBracket" type="xs:string" use="optional" default="(" />
     <xs:attribute name="CloseBracket" type="xs:string" use="optional"  default=")" />
     <xs:attribute name="Prioritizer" type="PrioritizerType" default="BracketPrioritizer" />
@@ -76,6 +75,7 @@
       <xs:element name="LogicalOperatorDefinitions" type="LogicalOperatorDefinitionsType" />
       <xs:element name="PredicateDefinitions" type="PredicateDefinitionsType" />
     </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required" />
   </xs:complexType>
 
 

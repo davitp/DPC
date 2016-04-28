@@ -49,6 +49,7 @@
     <Compile Include="Definitions\PrioritizerOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\LanguageDefinitionRepository.cs" />
+    <Compile Include="Utility\TemplateUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LanguageSchema\LanguageDefinition.xsd">

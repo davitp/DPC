@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Xml;
 using System.Xml.Schema;
 using DPC.Specification.Definitions;
 using DPC.Specification.Repository;
+using DPC.Specification.Utility;
 
 namespace DPC.Specification.API
 {
@@ -99,16 +99,133 @@ namespace DPC.Specification.API
             // iterate over laguage definitions
             foreach (XmlNode languageDefinitionNode in languageDefinitions.ChildNodes)
             {
+                // check for existance
+                if (languageDefinitionNode.Attributes?["Name"] == null)
+                {
+                    throw new Exception("Unable to read name of language");
+                }
+
+                // name of language
+                var name = languageDefinitionNode.Attributes?["Name"].InnerText;
+
+                // create language
+                var language = new LanguageDefinition()
+                {
+                    Name = name
+                };
+
+                // get metadata node
+                var metadataNode = languageDefinitionNode["MetadataDefinition"];
+
+                // try fill metadata information
+                if (metadataNode != null)
+                {
+                    // try get Open and Close brackets
+                    language.Metadata.OpenBracket = metadataNode.Attributes["OpenBracket"]?.InnerText ?? string.Empty;
+                    language.Metadata.CloseBracket = metadataNode.Attributes["CloseBracket"]?.InnerText ?? string.Empty;
+
+                    // default prioritizer
+                    PrioritizerOption prioritizer;
+
+                    // try parse prioritizer option
+                    Enum.TryParse(metadataNode.Attributes["Prioritizer"]?.InnerText ?? string.Empty, true, out prioritizer);
+
+                    // then assign
+                    language.Metadata.Prioritizer = prioritizer;
+                }
+
+                // get predicates node
+                var predicatesNode = languageDefinitionNode["PredicateDefinitions"];
+                var logicalsNode = languageDefinitionNode["LogicalOperatorDefinitions"];
+
+                // check
+                if (predicatesNode == null || logicalsNode == null)
+                {
+                    throw  new Exception("Predicates or Logicals node is not defined");
+                }
+
+                // iterate over predicate definitions
+                foreach (XmlNode predNode in predicatesNode.ChildNodes )
+                {
+                    // parse predicate into language
+                    ParsePredicateNode(predNode, language);
+                }
+
+                // iterate over logical definitions
+                foreach (XmlNode logicalNode in logicalsNode.ChildNodes)
+                {
+                    // parse logical operator into language
+                    ParseLogicalOperationNode(logicalNode, language);
+                }
+
+
                 // register corresponding laguage definition
                 LanguageDefinitionRepository
                     .Instance
-                    .RegisterLanguageDefinition(new LanguageDefinition()
-                    {
-
-                    });
-                break;
-                
+                    .RegisterLanguageDefinition(language);                
             }
+        }
+
+        /// <summary>
+        /// Parse logical operator node
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="language"></param>
+        private static void ParseLogicalOperationNode(XmlNode node, LanguageDefinition language)
+        {
+            // get opcode
+            var opcode = node.Attributes?["Operator"]?.InnerText;
+
+            // get implementation
+            var implentation = node.Attributes?["Implementation"]?.InnerText;
+
+            // try get dimention
+            var dimention = int.Parse(node.Attributes?["Dimention"]?.InnerText ?? "-1");
+
+            // check of existence
+            if (opcode == null || implentation == null)
+            {
+                throw  new Exception($"Operator name {opcode ?? string.Empty} and implementation {implentation ?? string.Empty} should be set");
+            }
+
+            // add logical operator
+            language.AddLogicalOperator(new LogicalOperatorDefinition()
+            {
+                Operator = opcode,
+                Implementation = implentation,
+                Dimention =  (dimention == -1) ? implentation.CountTempaltedArgs() : dimention
+            });
+        }
+
+        /// <summary>
+        /// Parse predicate operator node
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="language"></param>
+        private static void ParsePredicateNode(XmlNode node, LanguageDefinition language)
+        {
+            // get opcode
+            var opcode = node.Attributes?["Operator"]?.InnerText;
+
+            // get implementation
+            var implentation = node.Attributes?["Implementation"]?.InnerText;
+
+            // try get dimention
+            var dimention = int.Parse(node.Attributes?["Dimention"]?.InnerText ?? "-1");
+
+            // check of existence
+            if (opcode == null || implentation == null)
+            {
+                throw new Exception($"Operator name {opcode ?? string.Empty} and implementation {implentation ?? string.Empty} should be set");
+            }
+
+            // add logical operator
+            language.AddPredicateOperator(new PredicateOperatorDefinition()
+            {
+                Operator = opcode,
+                Implementation = implentation,
+                Dimention = (dimention == -1) ? implentation.CountTempaltedArgs() : dimention
+            });
         }
 
         /// <summary>

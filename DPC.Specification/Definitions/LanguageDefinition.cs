@@ -11,7 +11,7 @@ namespace DPC.Specification.Definitions
         /// <summary>
         /// Definition of language metadata
         /// </summary>
-        public LanguageMetadataDefinition Metadata { get; protected set; }
+        public LanguageMetadataDefinition Metadata { get; set; }
 
         /// <summary>
         /// Logical operator definitions identified by opcode
@@ -26,7 +26,7 @@ namespace DPC.Specification.Definitions
         /// <summary>
         /// Name of language definition
         /// </summary>
-        public string Name => Metadata.Name;
+        public string Name { get; set; }
 
         /// <summary>
         /// Default constructor
@@ -36,6 +36,7 @@ namespace DPC.Specification.Definitions
             Metadata = new LanguageMetadataDefinition();
             LogicalOperators = new Dictionary<string, LogicalOperatorDefinition>();
             PredicateOperators = new Dictionary<string, PredicateOperatorDefinition>();
+            Name = string.Empty;
         }
 
         /// <summary>
@@ -68,6 +69,44 @@ namespace DPC.Specification.Definitions
 
             // throw on problem
             throw new Exception($"Predicate Operator with code ({opcode}) is not defined");
+        }
+
+        /// <summary>
+        /// Add logical operator
+        /// </summary>
+        /// <param name="operator"></param>
+        public void AddLogicalOperator(LogicalOperatorDefinition @operator)
+        {
+            // key of operator
+            var key = @operator.Operator;
+
+            // check existance
+            if (LogicalOperators.ContainsKey(key))
+            {
+                throw new Exception($"Operator with code {key} is already defined");
+            }
+
+            // register operator
+            LogicalOperators.Add(key, @operator);
+        }
+
+        /// <summary>
+        /// Add predicate operator
+        /// </summary>
+        /// <param name="operator"></param>
+        public void AddPredicateOperator(PredicateOperatorDefinition @operator)
+        {
+            // key of operator
+            var key = @operator.Operator;
+
+            // check existance
+            if (PredicateOperators.ContainsKey(key))
+            {
+                throw new Exception($"Operator with code {key} is already defined");
+            }
+
+            // register operator
+            PredicateOperators.Add(key, @operator);
         }
     }
 }

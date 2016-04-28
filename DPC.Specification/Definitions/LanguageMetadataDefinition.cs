@@ -6,11 +6,6 @@
     public class LanguageMetadataDefinition
     {
         /// <summary>
-        /// Name of language
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
         /// Open Bracket for language specific code generation
         /// </summary>
         public string OpenBracket { get; set; }
@@ -31,7 +26,6 @@
         /// </summary>
         public LanguageMetadataDefinition()
         {
-            Name = string.Empty;
             OpenBracket = string.Empty;
             CloseBracket = string.Empty;
         }
