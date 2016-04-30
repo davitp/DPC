@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
 using DPC.Model;
 using DPC.Processor.Default;
 using DPC.Processor.Repository;
@@ -17,17 +13,22 @@ namespace DPC.UnitTests
     [TestClass]
     public class DPCUnitTests
     {
+        /// <summary>
+        /// Unitialize Unit Test
+        /// </summary>
         public DPCUnitTests()
         {
-            OutputLocation = AppDomain.CurrentDomain.BaseDirectory;
+            // Initialize specification by XML path
             Specification.API.Specification.Initialize(LanguageDefinitionsPath);
+
+            // Register SQL Language
+            FormulaProcessorRepository.Instance.RegisterFormulaProcessor(new DefaultFormulaProcessor("SQL"));
+
+            // Register Armenian Language
+            FormulaProcessorRepository.Instance.RegisterFormulaProcessor(new DefaultFormulaProcessor("Armenian"));
         }
 
-        /// <summary>
-        /// Output location
-        /// </summary>
-        private string OutputLocation { get; set; }
-
+       
         /// <summary>
         /// Prefix of path containing the XSD and XML definitions for testing
         /// </summary>
@@ -39,10 +40,11 @@ namespace DPC.UnitTests
         public const string LanguageDefinitionsPath = "LanguageDefinitions.xml";
 
         /// <summary>
-        /// Dummy test method
+        /// Combined unit test method
+        /// Languages should be processed in basic level
         /// </summary>
         [TestMethod]
-        public void DummyTest()
+        public void CombinedTest()
         {
             var subtree1 = new Predicate()
             {
@@ -88,7 +90,7 @@ namespace DPC.UnitTests
                 }
             };
 
-            
+
 
             var formula = new Formula()
             {
@@ -97,16 +99,27 @@ namespace DPC.UnitTests
                     OpCode = "__Or",
                     Children = new List<IFormulaNode>()
                     {
-                        subtree1, subtree3
+                        subtree1,
+                        subtree3
                     }
                 }
 
-        };
+            };          
 
-            FormulaProcessorRepository.Instance.RegisterFormulaProcessor(new DefaultFormulaProcessor("SQL"));
-            var processor = FormulaProcessorRepository.Instance.GetFormulaProcessor("SQL");
-            var result = processor.Process(formula);
+            var armenian = FormulaProcessorRepository
+                .Instance
+                .GetFormulaProcessor("Armenian");
 
+            var sql = FormulaProcessorRepository
+                .Instance
+                .GetFormulaProcessor("SQL");
+
+            var resultAM = armenian.Process(formula);
+
+            var resultSQL = sql.Process(formula);
+
+            Assert.IsNotNull(resultAM);
+            Assert.IsNotNull(resultSQL);
         }
     }
 }

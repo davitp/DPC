@@ -30,4 +30,20 @@
       <PredicateDefinition Operator="{Falsehood}" Implementation="FALSE"/>
     </PredicateDefinitions>
   </LanguageDefinition>
+
+  <LanguageDefinition Name="Armenian">
+
+    <MetadataDefinition OpenBracket="(" CloseBracket=")" Prioritizer="BracketPrioritizer" />
+
+    <LogicalOperatorDefinitions>
+      <LogicalOperatorDefinition Operator="{AND}"  Implementation="{0} և {1}"/>
+      <LogicalOperatorDefinition Operator="{OR}" Implementation="{0} կամ {1}" />
+    </LogicalOperatorDefinitions>
+
+    <PredicateDefinitions>
+      <PredicateDefinition Operator="{Equal}" Implementation="{0}-ը հավասար է {1}-ի"/>
+      <PredicateDefinition Operator="{Less}" Implementation="{0}-ը փոքր է {1}-ից"/>
+      <PredicateDefinition Operator="{IsZero}" Implementation="{0}-ը զրո է"/>
+    </PredicateDefinitions>
+  </LanguageDefinition>
 </LanguageDefinitions> 
