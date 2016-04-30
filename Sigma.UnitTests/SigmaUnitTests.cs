@@ -1,19 +1,29 @@
 ﻿using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sigma.Model;
 using Sigma.Processor;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Sigma.UnitTests
 {
     /// <summary>
-    /// Main unit test class
+    ///     Main unit test class
     /// </summary>
     [DeploymentItem(PathPrefix + @"\" + LanguageDefinitionsPath)]
     [TestClass]
     public class SigmaUnitTests
     {
         /// <summary>
-        /// Unitialize Unit Test
+        ///     Prefix of path containing the XSD and XML definitions for testing
+        /// </summary>
+        public const string PathPrefix = "Definitions";
+
+        /// <summary>
+        ///     Language definitions file path
+        /// </summary>
+        public const string LanguageDefinitionsPath = "LanguageDefinitions.xml";
+
+        /// <summary>
+        ///     Unitialize Unit Test
         /// </summary>
         public SigmaUnitTests()
         {
@@ -27,62 +37,51 @@ namespace Sigma.UnitTests
             FormulaProcessorRepository.Instance.RegisterFormulaProcessor(new DefaultFormulaProcessor("Armenian"));
         }
 
-       
         /// <summary>
-        /// Prefix of path containing the XSD and XML definitions for testing
-        /// </summary>
-        public const string PathPrefix = "Definitions";
-
-        /// <summary>
-        /// Language definitions file path
-        /// </summary>
-        public const string LanguageDefinitionsPath = "LanguageDefinitions.xml";
-
-        /// <summary>
-        /// Combined unit test method
-        /// Languages should be processed in basic level
+        ///     Combined unit test method
+        ///     Languages should be processed in basic level
         /// </summary>
         [TestMethod]
         public void CombinedTest()
         {
-            var subtree1 = new Predicate()
+            var subtree1 = new Predicate
             {
                 OpCode = "__Equal",
                 Parent = null,
-                Children = new List<IFormulaNode>()
+                Children = new List<IFormulaNode>
                 {
-                    new Operand()
+                    new Operand
                     {
                         Value = 1
                     },
-                    new Operand()
+                    new Operand
                     {
                         Value = 1
                     }
                 }
             };
 
-            var subtree2 = new Predicate()
+            var subtree2 = new Predicate
             {
                 OpCode = "__Less",
                 Parent = null,
-                Children = new List<IFormulaNode>()
+                Children = new List<IFormulaNode>
                 {
-                    new Operand()
+                    new Operand
                     {
                         Value = 1
                     },
-                    new Operand()
+                    new Operand
                     {
                         Value = 2
                     }
                 }
             };
 
-            var subtree3 = new Logical()
+            var subtree3 = new Logical
             {
                 OpCode = "__And",
-                Children = new List<IFormulaNode>()
+                Children = new List<IFormulaNode>
                 {
                     subtree1,
                     subtree2
@@ -90,20 +89,18 @@ namespace Sigma.UnitTests
             };
 
 
-
-            var formula = new Formula()
+            var formula = new Formula
             {
-                Tree = new Logical()
+                Tree = new Logical
                 {
                     OpCode = "__Or",
-                    Children = new List<IFormulaNode>()
+                    Children = new List<IFormulaNode>
                     {
                         subtree1,
                         subtree3
                     }
                 }
-
-            };          
+            };
 
             var armenian = FormulaProcessorRepository
                 .Instance
@@ -122,5 +119,3 @@ namespace Sigma.UnitTests
         }
     }
 }
-
-

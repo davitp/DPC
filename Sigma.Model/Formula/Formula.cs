@@ -3,14 +3,14 @@
 namespace Sigma.Model
 {
     /// <summary>
-    /// Definition of formula
-    /// 1. Predicate with operands is formula
-    /// 2. Logical operators with Predicate operands 
+    ///     Definition of formula
+    ///     1. Predicate with operands is formula
+    ///     2. Logical operators with Predicate operands
     /// </summary>
     public class Formula
     {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public Formula()
         {
@@ -18,12 +18,12 @@ namespace Sigma.Model
         }
 
         /// <summary>
-        /// Expression tree node
+        ///     Expression tree node
         /// </summary>
         public IFormulaNode Tree { get; set; }
 
         /// <summary>
-        /// Traverse on tree and apply action on each node
+        ///     Traverse on tree and apply action on each node
         /// </summary>
         /// <param name="action"></param>
         public void Traverse(Action<IFormulaNode> action)
@@ -36,7 +36,7 @@ namespace Sigma.Model
         }
 
         /// <summary>
-        /// Recursive implementation of traverse operation
+        ///     Recursive implementation of traverse operation
         /// </summary>
         /// <param name="action"></param>
         /// <param name="node"></param>

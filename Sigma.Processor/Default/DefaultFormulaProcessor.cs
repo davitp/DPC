@@ -8,13 +8,13 @@ using Sigma.Specification;
 namespace Sigma.Processor
 {
     /// <summary>
-    /// Default Formula Processor
-    /// Can be extended to meet custom requirements
+    ///     Default Formula Processor
+    ///     Can be extended to meet custom requirements
     /// </summary>
     public class DefaultFormulaProcessor : IFormulaProcessor
     {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="language"></param>
         public DefaultFormulaProcessor(string language)
@@ -26,17 +26,17 @@ namespace Sigma.Processor
         }
 
         /// <summary>
-        /// Language of processor
-        /// </summary>
-        public string Language { get; }
-
-        /// <summary>
-        /// Language definition cache 
+        ///     Language definition cache
         /// </summary>
         private LanguageDefinition LanguageDefinition { get; }
 
         /// <summary>
-        /// Process formula to generated code
+        ///     Language of processor
+        /// </summary>
+        public string Language { get; }
+
+        /// <summary>
+        ///     Process formula to generated code
         /// </summary>
         /// <param name="formula"></param>
         /// <returns></returns>
@@ -50,7 +50,7 @@ namespace Sigma.Processor
         }
 
         /// <summary>
-        /// Implementation of processing logic
+        ///     Implementation of processing logic
         /// </summary>
         /// <param name="root"></param>
         private string ProcessImplementation(IFormulaNode root)
@@ -68,7 +68,7 @@ namespace Sigma.Processor
             }
 
             // handle case when node is operand
-            if(root is Operand)
+            if (root is Operand)
             {
                 return RepresentOperand(root as Operand);
             }
@@ -78,7 +78,7 @@ namespace Sigma.Processor
         }
 
         /// <summary>
-        /// Represent logical operator by language specific expression
+        ///     Represent logical operator by language specific expression
         /// </summary>
         /// <param name="logical"></param>
         /// <returns></returns>
@@ -91,18 +91,19 @@ namespace Sigma.Processor
             // check correctness of children 
             if (definition.Dimention != logical.Children.Count)
             {
-                throw new 
-                    Exception($"Logical operator {logical.OpCode} requires {definition.Dimention} operands, but {logical.Children.Count} is passed");
+                throw new
+                    Exception(
+                    $"Logical operator {logical.OpCode} requires {definition.Dimention} operands, but {logical.Children.Count} is passed");
             }
 
             // collection of predicates to be listed here
             var tokens = new object[definition.Dimention];
 
             // iterate over child nodes
-            for (int i = 0; i < logical.Children.Count; i++)
+            for (var i = 0; i < logical.Children.Count; i++)
             {
                 var node = logical.Children[i];
-                
+
                 // handle logical subtree
                 if (node is Logical)
                 {
@@ -130,7 +131,7 @@ namespace Sigma.Processor
                 // put brackets inside
                 return string.Concat(
                     LanguageDefinition.Metadata.OpenBracket,
-                    representation, 
+                    representation,
                     LanguageDefinition.Metadata.CloseBracket
                     );
             }
@@ -139,7 +140,7 @@ namespace Sigma.Processor
         }
 
         /// <summary>
-        /// Represent predicate by langauge specific expression
+        ///     Represent predicate by langauge specific expression
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
@@ -158,14 +159,15 @@ namespace Sigma.Processor
             // check for arguments correctness
             if (definition.Dimention != args.Length)
             {
-                throw new Exception($"Predicate {predicate.OpCode} requires {definition.Dimention} arguments, but {args.Length} is passed");
+                throw new Exception(
+                    $"Predicate {predicate.OpCode} requires {definition.Dimention} arguments, but {args.Length} is passed");
             }
 
             return string.Format(definition.Implementation, args);
         }
 
         /// <summary>
-        /// Represents operand using specification
+        ///     Represents operand using specification
         /// </summary>
         /// <param name="operand"></param>
         /// <returns></returns>

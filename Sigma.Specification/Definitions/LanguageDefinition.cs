@@ -4,32 +4,12 @@ using System.Collections.Generic;
 namespace Sigma.Specification
 {
     /// <summary>
-    /// Defines Language
+    ///     Defines Language
     /// </summary>
     public class LanguageDefinition
     {
         /// <summary>
-        /// Definition of language metadata
-        /// </summary>
-        public LanguageMetadataDefinition Metadata { get; set; }
-
-        /// <summary>
-        /// Logical operator definitions identified by opcode
-        /// </summary>
-        private Dictionary<string, LogicalOperatorDefinition> LogicalOperators { get; }
-
-        /// <summary>
-        /// Predicate operator definitions identified by opcode
-        /// </summary>
-        private Dictionary<string, PredicateOperatorDefinition> PredicateOperators { get; }
-
-        /// <summary>
-        /// Name of language definition
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Default constructor
+        ///     Default constructor
         /// </summary>
         public LanguageDefinition()
         {
@@ -40,7 +20,27 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Get logical operator from definition
+        ///     Definition of language metadata
+        /// </summary>
+        public LanguageMetadataDefinition Metadata { get; set; }
+
+        /// <summary>
+        ///     Logical operator definitions identified by opcode
+        /// </summary>
+        private Dictionary<string, LogicalOperatorDefinition> LogicalOperators { get; }
+
+        /// <summary>
+        ///     Predicate operator definitions identified by opcode
+        /// </summary>
+        private Dictionary<string, PredicateOperatorDefinition> PredicateOperators { get; }
+
+        /// <summary>
+        ///     Name of language definition
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        ///     Get logical operator from definition
         /// </summary>
         /// <param name="opcode"></param>
         /// <returns></returns>
@@ -56,7 +56,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Get predicate operator from definition
+        ///     Get predicate operator from definition
         /// </summary>
         /// <param name="opcode"></param>
         /// <returns></returns>
@@ -72,7 +72,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Add logical operator
+        ///     Add logical operator
         /// </summary>
         /// <param name="operator"></param>
         public void AddLogicalOperator(LogicalOperatorDefinition @operator)
@@ -91,7 +91,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Add predicate operator
+        ///     Add predicate operator
         /// </summary>
         /// <param name="operator"></param>
         public void AddPredicateOperator(PredicateOperatorDefinition @operator)

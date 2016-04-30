@@ -1,63 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <xs:schema id="LanguageDefinition"
-    targetNamespace="http://gnu.org"
-    elementFormDefault="qualified"
-    attributeFormDefault="unqualified"
-    xmlns="http://gnu.org"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
->
+           targetNamespace="http://gnu.org"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           xmlns="http://gnu.org"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:simpleType name="LogicalOperatorType" id="__LogicalOperatorType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="{AND}" id="__And" />
-      <xs:enumeration value="{OR}" id="__Or"/>
-      <xs:enumeration value="{NOT}" id="__Not"/>
+      <xs:enumeration value="{OR}" id="__Or" />
+      <xs:enumeration value="{NOT}" id="__Not" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="PredicateType" id="__PredicateType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="{Equal}" id="__Equal" />
-      <xs:enumeration value="{NotEqual}" id="__NotEqual"/>
-      <xs:enumeration value="{Less}"  id="__Less"/>
+      <xs:enumeration value="{NotEqual}" id="__NotEqual" />
+      <xs:enumeration value="{Less}" id="__Less" />
       <xs:enumeration value="{Greater}" id="__Greater" />
       <xs:enumeration value="{LessOrEqual}" id="__LessOrEqual" />
-      <xs:enumeration value="{GreaterOrEqual}" id="__GreaterOrEqual"/>
+      <xs:enumeration value="{GreaterOrEqual}" id="__GreaterOrEqual" />
       <xs:enumeration value="{Between}" id="__Between" />
-      <xs:enumeration value="{HasSubstring}"  id="__HasSubstring"/>
-      <xs:enumeration value="{IsSubstring}" id="__IsSubstring"/>
-      <xs:enumeration value="{IsZero}"  id="__IsZero"/>
-      <xs:enumeration value="{In}" id="__In"/>
+      <xs:enumeration value="{HasSubstring}" id="__HasSubstring" />
+      <xs:enumeration value="{IsSubstring}" id="__IsSubstring" />
+      <xs:enumeration value="{IsZero}" id="__IsZero" />
+      <xs:enumeration value="{In}" id="__In" />
       <xs:enumeration value="{Truth}" id="__Truth" />
       <xs:enumeration value="{Falsehood}" id="__Falsehood" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="PrioritizerType">
-    <xs:restriction base="xs:string" >
+    <xs:restriction base="xs:string">
       <xs:enumeration value="BracketPrioritizer" />
       <xs:enumeration value="AutoPrioritizer" />
     </xs:restriction>
   </xs:simpleType>
 
   <xs:complexType name="LogicalOperatorDefinitionType">
-    <xs:attribute name="Operator" type="LogicalOperatorType" use="required"  />
-    <xs:attribute name="Implementation" type="xs:string" use="required"  />
+    <xs:attribute name="Operator" type="LogicalOperatorType" use="required" />
+    <xs:attribute name="Implementation" type="xs:string" use="required" />
     <xs:attribute name="Dimention" type="xs:int" default="-1" use="optional" />
   </xs:complexType>
 
   <xs:complexType name="PredicateDefinitionType">
-    <xs:attribute name="Operator"  type="PredicateType" use ="required"/>
-    <xs:attribute name="Implementation"  type="xs:string" use="required"/>
-    <xs:attribute name="Dimention" type="xs:int" default="-1" use ="optional" />
+    <xs:attribute name="Operator" type="PredicateType" use="required" />
+    <xs:attribute name="Implementation" type="xs:string" use="required" />
+    <xs:attribute name="Dimention" type="xs:int" default="-1" use="optional" />
   </xs:complexType>
 
   <xs:complexType name="LogicalOperatorDefinitionsType">
     <xs:sequence>
-      <xs:element name="LogicalOperatorDefinition" type="LogicalOperatorDefinitionType" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="LogicalOperatorDefinition" type="LogicalOperatorDefinitionType" minOccurs="1"
+                  maxOccurs="unbounded" />
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="PredicateDefinitionsType" >
+  <xs:complexType name="PredicateDefinitionsType">
     <xs:sequence>
       <xs:element name="PredicateDefinition" type="PredicateDefinitionType" minOccurs="1" maxOccurs="unbounded" />
     </xs:sequence>
@@ -65,13 +66,13 @@
 
   <xs:complexType name="LanguageMetadataDefinitionType">
     <xs:attribute name="OpenBracket" type="xs:string" use="optional" default="(" />
-    <xs:attribute name="CloseBracket" type="xs:string" use="optional"  default=")" />
+    <xs:attribute name="CloseBracket" type="xs:string" use="optional" default=")" />
     <xs:attribute name="Prioritizer" type="PrioritizerType" default="BracketPrioritizer" />
   </xs:complexType>
-  
+
   <xs:complexType name="LanguageDefinitionType">
     <xs:sequence>
-      <xs:element name="MetadataDefinition" type="LanguageMetadataDefinitionType"/>
+      <xs:element name="MetadataDefinition" type="LanguageMetadataDefinitionType" />
       <xs:element name="LogicalOperatorDefinitions" type="LogicalOperatorDefinitionsType" />
       <xs:element name="PredicateDefinitions" type="PredicateDefinitionsType" />
     </xs:sequence>
@@ -82,9 +83,9 @@
   <xs:element name="LanguageDefinitions">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="LanguageDefinition"  type="LanguageDefinitionType" minOccurs="1" maxOccurs="unbounded"/>
+        <xs:element name="LanguageDefinition" type="LanguageDefinitionType" minOccurs="1" maxOccurs="unbounded" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
 </xs:schema>

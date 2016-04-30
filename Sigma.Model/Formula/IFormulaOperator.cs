@@ -1,13 +1,13 @@
 ﻿namespace Sigma.Model
 {
     /// <summary>
-    /// Formula Operator interface
+    ///     Formula Operator interface
     /// </summary>
     public interface IFormulaOperator
     {
         /// <summary>
-        /// Operator should define an unique OpCode
+        ///     Operator should define an unique OpCode
         /// </summary>
-        string OpCode { get; set; } 
+        string OpCode { get; set; }
     }
 }

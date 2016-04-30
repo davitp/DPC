@@ -4,12 +4,12 @@ using System.Text.RegularExpressions;
 namespace Sigma.Specification
 {
     /// <summary>
-    /// Utitlities for templated strings
+    ///     Utitlities for templated strings
     /// </summary>
     public static class TemplateUtils
     {
         /// <summary>
-        /// Count arguments in templated string
+        ///     Count arguments in templated string
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

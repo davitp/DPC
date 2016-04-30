@@ -4,12 +4,17 @@ using System.Collections.Generic;
 namespace Sigma.Specification
 {
     /// <summary>
-    /// Language Definition Repository
+    ///     Language Definition Repository
     /// </summary>
     public class LanguageDefinitionRepository
     {
         /// <summary>
-        /// Default Constructor 
+        ///     Single instance internals
+        /// </summary>
+        private static LanguageDefinitionRepository instance;
+
+        /// <summary>
+        ///     Default Constructor
         /// </summary>
         public LanguageDefinitionRepository()
         {
@@ -17,22 +22,18 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Single instance internals
+        ///     Get single instance of repository
         /// </summary>
-        private static LanguageDefinitionRepository instance;
+        public static LanguageDefinitionRepository Instance
+            => instance ?? (instance = new LanguageDefinitionRepository());
 
         /// <summary>
-        /// Get single instance of repository
-        /// </summary>
-        public static LanguageDefinitionRepository Instance => instance ?? (instance = new LanguageDefinitionRepository());
-
-        /// <summary>
-        /// Logical operator mappings by language
+        ///     Logical operator mappings by language
         /// </summary>
         private Dictionary<string, LanguageDefinition> LanguageDefinitions { get; }
 
         /// <summary>
-        /// Ask Repository for language definition
+        ///     Ask Repository for language definition
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
@@ -48,7 +49,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Register language definition
+        ///     Register language definition
         /// </summary>
         /// <param name="definition"></param>
         public void RegisterLanguageDefinition(LanguageDefinition definition)
@@ -56,7 +57,7 @@ namespace Sigma.Specification
             // check for existance
             if (LanguageDefinitions.ContainsKey(definition.Name))
             {
-                throw  new Exception($"Language with name {definition.Name} is already registered");
+                throw new Exception($"Language with name {definition.Name} is already registered");
             }
 
             // add 

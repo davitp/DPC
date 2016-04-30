@@ -3,12 +3,12 @@
 namespace Sigma.Expressions
 {
     /// <summary>
-    /// Defines Expression class interface
+    ///     Defines Expression class interface
     /// </summary>
     public class SigmaExpression
     {
         /// <summary>
-        /// Parameterless constructor
+        ///     Parameterless constructor
         /// </summary>
         public SigmaExpression()
         {
@@ -16,7 +16,7 @@ namespace Sigma.Expressions
         }
 
         /// <summary>
-        /// Internal Formula object corresponding to SigmaExpression
+        ///     Internal Formula object corresponding to SigmaExpression
         /// </summary>
         protected Formula InnerFormula { get; set; }
     }

@@ -3,18 +3,18 @@
 namespace Sigma.Model
 {
     /// <summary>
-    /// Predicate tree node interface
+    ///     Predicate tree node interface
     /// </summary>
     public interface IFormulaNode
     {
         /// <summary>
-        /// Parent Node
+        ///     Parent Node
         /// </summary>
         IFormulaNode Parent { get; set; }
 
         /// <summary>
-        /// Child nodes 
+        ///     Child nodes
         /// </summary>
-        IList<IFormulaNode> Children { get; set; } 
+        IList<IFormulaNode> Children { get; set; }
     }
 }

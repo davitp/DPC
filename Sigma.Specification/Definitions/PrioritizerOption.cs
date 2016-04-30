@@ -1,7 +1,7 @@
 ﻿namespace Sigma.Specification
 {
     /// <summary>
-    /// Option of prioritizer
+    ///     Option of prioritizer
     /// </summary>
     public enum PrioritizerOption : int
     {

@@ -8,12 +8,12 @@ using System.Xml.Schema;
 namespace Sigma.Specification
 {
     /// <summary>
-    /// Specification layer representative
+    ///     Specification layer representative
     /// </summary>
     public class Specification
     {
         /// <summary>
-        /// Static constructor
+        ///     Static constructor
         /// </summary>
         static Specification()
         {
@@ -23,7 +23,27 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Initialize specification layer
+        ///     Path of XML
+        /// </summary>
+        public static string Path { get; private set; }
+
+        /// <summary>
+        ///     Path of XSD
+        /// </summary>
+        public static string XSDPath { get; private set; }
+
+        /// <summary>
+        ///     XML document to be stored here
+        /// </summary>
+        private static XmlDocument Document { get; set; }
+
+        /// <summary>
+        ///     Mapping XSD based id of operator to XML based name
+        /// </summary>
+        private static Dictionary<string, string> OperatorMapping { get; }
+
+        /// <summary>
+        ///     Initialize specification layer
         /// </summary>
         /// <param name="path"></param>
         public static void Initialize(string path)
@@ -34,7 +54,7 @@ namespace Sigma.Specification
             // check file for existance
             if (!File.Exists(path))
             {
-                throw  new Exception($"File {path} does not exist");
+                throw new Exception($"File {path} does not exist");
             }
 
             // initialize
@@ -42,27 +62,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Path of XML
-        /// </summary>
-        public static string Path { get; private set; }
-
-        /// <summary>
-        /// Path of XSD
-        /// </summary>
-        public static string XSDPath { get; private set; }
-
-        /// <summary>
-        /// XML document to be stored here
-        /// </summary>
-        private static XmlDocument Document { get; set; }
-
-        /// <summary>
-        /// Mapping XSD based id of operator to XML based name
-        /// </summary>
-        private static Dictionary<string, string> OperatorMapping { get; } 
-
-        /// <summary>
-        /// Initialize Language Definitions
+        ///     Initialize Language Definitions
         /// </summary>
         private static void InitializeImplementation()
         {
@@ -80,7 +80,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Initialize XML related data
+        ///     Initialize XML related data
         /// </summary>
         private static void InitializeXml()
         {
@@ -90,7 +90,7 @@ namespace Sigma.Specification
             // check for element presence
             if (languageDefinitions == null)
             {
-                throw  new Exception($"Something went wrong in document {Path}");
+                throw new Exception($"Something went wrong in document {Path}");
             }
 
             // iterate over laguage definitions
@@ -106,7 +106,7 @@ namespace Sigma.Specification
                 var name = languageDefinitionNode.Attributes?["Name"].InnerText;
 
                 // create language
-                var language = new LanguageDefinition()
+                var language = new LanguageDefinition
                 {
                     Name = name
                 };
@@ -125,7 +125,8 @@ namespace Sigma.Specification
                     PrioritizerOption prioritizer;
 
                     // try parse prioritizer option
-                    Enum.TryParse(metadataNode.Attributes["Prioritizer"]?.InnerText ?? string.Empty, true, out prioritizer);
+                    Enum.TryParse(metadataNode.Attributes["Prioritizer"]?.InnerText ?? string.Empty, true,
+                        out prioritizer);
 
                     // then assign
                     language.Metadata.Prioritizer = prioritizer;
@@ -138,11 +139,11 @@ namespace Sigma.Specification
                 // check
                 if (predicatesNode == null || logicalsNode == null)
                 {
-                    throw  new Exception("Predicates or Logicals node is not defined");
+                    throw new Exception("Predicates or Logicals node is not defined");
                 }
 
                 // iterate over predicate definitions
-                foreach (XmlNode predNode in predicatesNode.ChildNodes )
+                foreach (XmlNode predNode in predicatesNode.ChildNodes)
                 {
                     // parse predicate into language
                     ParsePredicateNode(predNode, language);
@@ -159,12 +160,12 @@ namespace Sigma.Specification
                 // register corresponding laguage definition
                 LanguageDefinitionRepository
                     .Instance
-                    .RegisterLanguageDefinition(language);                
+                    .RegisterLanguageDefinition(language);
             }
         }
 
         /// <summary>
-        /// Parse logical operator node
+        ///     Parse logical operator node
         /// </summary>
         /// <param name="node"></param>
         /// <param name="language"></param>
@@ -182,20 +183,21 @@ namespace Sigma.Specification
             // check of existence
             if (opcode == null || implentation == null)
             {
-                throw  new Exception($"Operator name {opcode ?? string.Empty} and implementation {implentation ?? string.Empty} should be set");
+                throw new Exception(
+                    $"Operator name {opcode ?? string.Empty} and implementation {implentation ?? string.Empty} should be set");
             }
 
             // add logical operator
-            language.AddLogicalOperator(new LogicalOperatorDefinition()
+            language.AddLogicalOperator(new LogicalOperatorDefinition
             {
                 Operator = opcode,
                 Implementation = implentation,
-                Dimention =  (dimention == -1) ? implentation.CountTempaltedArgs() : dimention
+                Dimention = dimention == -1 ? implentation.CountTempaltedArgs() : dimention
             });
         }
 
         /// <summary>
-        /// Parse predicate operator node
+        ///     Parse predicate operator node
         /// </summary>
         /// <param name="node"></param>
         /// <param name="language"></param>
@@ -213,20 +215,21 @@ namespace Sigma.Specification
             // check of existence
             if (opcode == null || implentation == null)
             {
-                throw new Exception($"Operator name {opcode ?? string.Empty} and implementation {implentation ?? string.Empty} should be set");
+                throw new Exception(
+                    $"Operator name {opcode ?? string.Empty} and implementation {implentation ?? string.Empty} should be set");
             }
 
             // add logical operator
-            language.AddPredicateOperator(new PredicateOperatorDefinition()
+            language.AddPredicateOperator(new PredicateOperatorDefinition
             {
                 Operator = opcode,
                 Implementation = implentation,
-                Dimention = (dimention == -1) ? implentation.CountTempaltedArgs() : dimention
+                Dimention = dimention == -1 ? implentation.CountTempaltedArgs() : dimention
             });
         }
 
         /// <summary>
-        /// Perform initialization part based on XSD
+        ///     Perform initialization part based on XSD
         /// </summary>
         private static void InitializeXsd()
         {
@@ -235,7 +238,7 @@ namespace Sigma.Specification
 
             // ns URI
             var ns = string.Empty;
-            
+
             // check for nulls
             if (Document.DocumentElement != null)
             {
@@ -263,7 +266,7 @@ namespace Sigma.Specification
             // check schema
             if (schema == null)
             {
-                throw  new Exception($"Something is wrong with schema in XSD {XSDPath}");
+                throw new Exception($"Something is wrong with schema in XSD {XSDPath}");
             }
 
             // get logical type restiction
@@ -296,14 +299,14 @@ namespace Sigma.Specification
                 .Facets
                 .Cast<XmlSchemaEnumerationFacet>()
                 .Union(predicates.Facets.Cast<XmlSchemaEnumerationFacet>());
-            
+
             // iterate on logical facet
             foreach (var facet in facets)
             {
                 // check existance
                 if (OperatorMapping.ContainsKey(facet.Id))
                 {
-                    throw  new Exception($"Operation mapping with key {facet.Id} is already added");
+                    throw new Exception($"Operation mapping with key {facet.Id} is already added");
                 }
 
                 // insert operation mapping
@@ -312,7 +315,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Resolve full path of xsd and write into XSDPath
+        ///     Resolve full path of xsd and write into XSDPath
         /// </summary>
         private static void ResolveXSD()
         {
@@ -350,7 +353,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Read XML document into memory
+        ///     Read XML document into memory
         /// </summary>
         private static void ReadDocument()
         {
@@ -369,7 +372,7 @@ namespace Sigma.Specification
         }
 
         /// <summary>
-        /// Map opcode to XML based name
+        ///     Map opcode to XML based name
         /// </summary>
         /// <param name="opcode"></param>
         /// <returns></returns>
