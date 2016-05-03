@@ -66,6 +66,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sigma.Expressions\Sigma.Expressions.csproj">
+      <Project>{03dff495-8a24-4726-b1d5-f97fec349257}</Project>
+      <Name>Sigma.Expressions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sigma.Model\Sigma.Model.csproj">
       <Project>{3fea3702-5d35-4074-9327-b7ffa403d109}</Project>
       <Name>Sigma.Model</Name>

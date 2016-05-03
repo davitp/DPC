@@ -12,15 +12,15 @@ namespace Sigma.Model
         /// <summary>
         ///     Constructor
         /// </summary>
-        public Formula()
+        public Formula(IFormulaNode tree)
         {
-            Tree = null;
+            Tree = tree;
         }
 
         /// <summary>
         ///     Expression tree node
         /// </summary>
-        public IFormulaNode Tree { get; set; }
+        public IFormulaNode Tree { get; }
 
         /// <summary>
         ///     Traverse on tree and apply action on each node
