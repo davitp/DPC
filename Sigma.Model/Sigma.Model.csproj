@@ -41,12 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formula\Constant.cs" />
     <Compile Include="Formula\Formula.cs" />
     <Compile Include="Formula\IFormulaNode.cs" />
     <Compile Include="Formula\IFormulaOperator.cs" />
     <Compile Include="Formula\Logical.cs" />
     <Compile Include="Formula\Operand.cs" />
     <Compile Include="Formula\Predicate.cs" />
+    <Compile Include="Formula\Variable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

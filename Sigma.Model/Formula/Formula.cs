@@ -14,7 +14,32 @@ namespace Sigma.Model
         /// </summary>
         public Formula(IFormulaNode tree)
         {
+            // assign tree
             Tree = tree;
+
+            // set parent child relationship
+            // Note, that relationship is only valid in formula context
+            SetRelationship(Tree);
+        }
+
+        /// <summary>
+        /// Set parent-child relation ship between root and children
+        /// </summary>
+        /// <param name="root"></param>
+        private void SetRelationship(IFormulaNode root)
+        {
+            // check for root correctness
+            if (root == null)
+            {
+                return;
+            }
+
+            // iterate over children
+            foreach (var child in root.Children)
+            {
+                // set relationship of child
+                SetRelationship(child);
+            }
         }
 
         /// <summary>

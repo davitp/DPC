@@ -181,6 +181,7 @@ namespace Sigma.UnitTests
             var b = 5;
             var c = 6;
             var d = 4;
+            var x = "x";
 
             var arithmetic = FormulaProcessorRepository
                 .Instance
@@ -189,7 +190,7 @@ namespace Sigma.UnitTests
             // b = c
             var formula = new Formula
             (
-                SigExp.Equal(b, c)
+                SigExp.Equal(SigExp.Var(x), c)
             );
 
             var resultArithmetic = arithmetic.Process(formula);

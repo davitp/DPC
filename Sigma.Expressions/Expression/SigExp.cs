@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Sigma.Model;
+﻿using Sigma.Model;
 
 namespace Sigma.Expressions
 {
@@ -20,7 +19,7 @@ namespace Sigma.Expressions
             return new Logical
             {
                 OpCode = OpCodes.And,
-                Children = new List<IFormulaNode> {left, right}
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -36,7 +35,7 @@ namespace Sigma.Expressions
             return new Logical
             {
                 OpCode = OpCodes.Or,
-                Children = new List<IFormulaNode> {left, right}
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -51,7 +50,7 @@ namespace Sigma.Expressions
             return new Logical
             {
                 OpCode = OpCodes.Not,
-                Children = new List<IFormulaNode> {right}
+                Children = ChildrenBuilder.Transform(right)
             };
         }
 
@@ -66,17 +65,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.Equal,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -91,17 +80,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.NotEqual,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -116,17 +95,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.Less,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -141,17 +110,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.Greater,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -166,17 +125,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.LessOrEqual,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -191,17 +140,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.GreaterOrEqual,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -216,17 +155,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.HasSubstring,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -241,17 +170,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.IsSubstring,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -266,17 +185,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.In,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = right
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, right)
             };
         }
 
@@ -292,21 +201,7 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.Between,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    },
-                    new Operand
-                    {
-                        Value = start
-                    },
-                    new Operand
-                    {
-                        Value = end
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left, start, end)
             };
         }
 
@@ -321,16 +216,9 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.IsZero,
-                Children = new List<IFormulaNode>
-                {
-                    new Operand
-                    {
-                        Value = left
-                    }
-                }
+                Children = ChildrenBuilder.Transform(left)
             };
         }
-
 
         /// <summary>
         ///     Shortcut to build Thruth predicate
@@ -353,6 +241,32 @@ namespace Sigma.Expressions
             return new Predicate
             {
                 OpCode = OpCodes.Falsehood
+            };
+        }
+
+        /// <summary>
+        ///     Shortcut to build variable node
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns></returns>
+        public static IFormulaNode Var(object variable)
+        {
+            return new Variable
+            {
+                Value = variable
+            };
+        }
+
+        /// <summary>
+        ///     Shortcut to build constant (literal) node
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IFormulaNode Const(object value)
+        {
+            return new Variable
+            {
+                Value = value
             };
         }
     }
