@@ -63,7 +63,7 @@
         /// <summary>
         ///     Predicate "Is substring of"
         /// </summary>
-        public static string IsSubstrings = "__IsSubstring";
+        public static string IsSubstring = "__IsSubstring";
 
         /// <summary>
         ///     Predicate "Is Zero"

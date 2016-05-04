@@ -47,4 +47,19 @@
       <PredicateDefinition Operator="{IsZero}" Implementation="{0}-ը զրո է" />
     </PredicateDefinitions>
   </LanguageDefinition>
+
+
+  <LanguageDefinition Name="Arithmetic">
+
+    <MetadataDefinition OpenBracket="(" CloseBracket=")" Prioritizer="BracketPrioritizer" />
+
+    <LogicalOperatorDefinitions>
+    </LogicalOperatorDefinitions>
+    
+    <PredicateDefinitions>
+      <PredicateDefinition Operator="{Equal}" Implementation="{0} = {1}" />
+      <PredicateDefinition Operator="{Less}" Implementation="{0} &#60; {1}" />
+      <PredicateDefinition Operator="{IsZero}" Implementation="{0} = 0" />
+    </PredicateDefinitions>
+  </LanguageDefinition>
 </LanguageDefinitions>

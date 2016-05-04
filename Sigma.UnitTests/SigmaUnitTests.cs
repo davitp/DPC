@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sigma.Model;
 using Sigma.Processor;
 using Sigma.Expressions;
+using System;
 
 namespace Sigma.UnitTests
 {
@@ -36,6 +37,9 @@ namespace Sigma.UnitTests
 
             // Register Armenian Language
             FormulaProcessorRepository.Instance.RegisterFormulaProcessor(new DefaultFormulaProcessor("Armenian"));
+
+            // Register Arithmetic Langauge
+            FormulaProcessorRepository.Instance.RegisterFormulaProcessor(new DefaultFormulaProcessor("Arithmetic"));
         }
 
         /// <summary>
@@ -124,6 +128,7 @@ namespace Sigma.UnitTests
         /// Basic test for expression
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void ExpressionBasicTest()
         {
             var a = 4;
@@ -140,20 +145,23 @@ namespace Sigma.UnitTests
                     SigExp.Equal(a, b),
                     SigExp.Or
                     (
-                        SigExp.Equal(b, c),
+                        SigExp.Not
+                        (
+                            SigExp.Equal(b, c)
+                        ),
                         SigExp.Equal(a, d)
                     )
                 )
             );
-
-
-            var armenian = FormulaProcessorRepository
-                .Instance
-                .GetFormulaProcessor("Armenian");
+            
 
             var sql = FormulaProcessorRepository
                 .Instance
                 .GetFormulaProcessor("SQL");
+
+            var armenian = FormulaProcessorRepository
+                .Instance
+                .GetFormulaProcessor("Armenian");
 
             var resultAM = armenian.Process(formula);
 
@@ -161,6 +169,51 @@ namespace Sigma.UnitTests
 
             Assert.IsNotNull(resultAM);
             Assert.IsNotNull(resultSQL);
+        }
+
+        /// <summary>
+        /// Basic test for arithmetic language
+        /// </summary>
+        [TestMethod]
+        public void ArithmeticBasicTest()
+        {
+            var a = 4;
+            var b = 5;
+            var c = 6;
+            var d = 4;
+
+            var arithmetic = FormulaProcessorRepository
+                .Instance
+                .GetFormulaProcessor("Arithmetic");
+
+            // b = c
+            var formula = new Formula
+            (
+                SigExp.Equal(b, c)
+            );
+
+            var resultArithmetic = arithmetic.Process(formula);
+
+            Assert.IsNotNull(resultArithmetic);
+
+
+            formula = new Formula
+            (
+                SigExp.Less(b, d)
+            );
+
+            resultArithmetic = arithmetic.Process(formula);
+
+            Assert.IsNotNull(resultArithmetic);
+
+            formula = new Formula
+            (
+                SigExp.IsZero(a)
+            );
+
+            resultArithmetic = arithmetic.Process(formula);
+
+            Assert.IsNotNull(resultArithmetic);
         }
     }
 }

@@ -53,14 +53,14 @@
 
   <xs:complexType name="LogicalOperatorDefinitionsType">
     <xs:sequence>
-      <xs:element name="LogicalOperatorDefinition" type="LogicalOperatorDefinitionType" minOccurs="1"
+      <xs:element name="LogicalOperatorDefinition" type="LogicalOperatorDefinitionType" minOccurs="0"
                   maxOccurs="unbounded" />
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="PredicateDefinitionsType">
     <xs:sequence>
-      <xs:element name="PredicateDefinition" type="PredicateDefinitionType" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="PredicateDefinition" type="PredicateDefinitionType" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
   </xs:complexType>
 
